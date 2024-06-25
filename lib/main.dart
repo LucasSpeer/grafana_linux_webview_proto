@@ -8,10 +8,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 enum GfDashboard {
+  all,
   voltage,
   temp,
   humidity;
 
+  final String allDarkUrl = 'http://localhost:3000/d/blLmWjtVz/demo-dashboard?orgId=1&from=1719330207347&to=1719351807347&theme=dark&kiosk=true';
   final String voltageDarkUrl =
       "http://localhost:3000/d/blLmWjtVz/demo-dashboard?orgId=1&from=1719324049660&to=1719345649660&theme=dark&viewPanel=6&kiosk=true";
   final String tempDarkUrl =
@@ -27,6 +29,8 @@ enum GfDashboard {
         return tempDarkUrl;
       case GfDashboard.humidity:
         return humidityDarkUrl;
+      case GfDashboard.all:
+        return allDarkUrl;
     }
   }
 }
@@ -144,6 +148,20 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                   ),
                 ],
               ),
+
+              //Shows all dashboards in a single webview, doesn't size great
+              // Expanded(
+              //   child: GrafanaWebView(
+              //     toShow: GfDashboard.all,
+              //     onCreate: (c, db) {
+              //       _controllers[db] = c;
+              //     },
+              //   ),
+              // ),
+              // Container(
+              //   height: 8,
+              // ),
+
               Expanded(
                 child: GrafanaWebView(
                   toShow: GfDashboard.voltage,
